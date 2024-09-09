@@ -1,11 +1,9 @@
-import { Navbar } from '@/components/Navbar'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
+    <div className="min-h-screen flex flex-col mt-20">
       <main className="flex-grow">
         <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
           <div className="text-center">
