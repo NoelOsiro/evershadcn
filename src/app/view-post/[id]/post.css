@@ -1,0 +1,106 @@
+/* General styles for the blog articles */
+.prose img {
+  max-width: 100%;
+  border-radius: 8px; /* Border radius for images */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for images */
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 4px; /* Adding radius for tables */
+}
+
+.prose table td, .prose table th {
+  padding: 8px; /* Padding for table cells */
+  border: 1px solid #ddd; /* Light border for table */
+}
+
+.prose p {
+  margin-bottom: 16px; /* Spacing for paragraphs */
+  line-height: 1.5;
+  font-size: 16px; /* Base font size */
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  font-weight: bold;
+  margin-bottom: 12px; /* Spacing after headers */
+  color: #333; /* Header color in light mode */
+}
+
+.prose a {
+  color: #007bff; /* Primary color for links */
+  text-decoration: underline;
+}
+
+.prose blockquote {
+  padding: 16px;
+  border-left: 4px solid #007bff; /* Styled blockquote */
+  background-color: #f8f9fa; /* Muted background */
+  border-radius: 4px;
+  margin-top: 16px; /* Spacing for blockquotes */
+  margin-bottom: 16px;
+}
+
+.prose ul {
+  list-style-type: disc;
+  margin-left: 24px; /* Indent for lists */
+  margin-top: 16px; /* Spacing for blockquotes */
+  margin-bottom: 16px;
+}
+
+.prose ol {
+  list-style-type: decimal;
+  margin-left: 24px;
+}
+
+.prose code {
+  background-color: #f8f9fa;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 14px; /* Styling for code blocks */
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid #e9ecef; /* Border for horizontal rules */
+  margin: 24px 0;
+}
+
+/* Dark mode adjustments */
+.dark .prose img {
+  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.3); /* Adjusted shadow for dark mode */
+}
+
+.dark .prose table {
+  border: 1px solid #444; /* Dark mode border */
+}
+
+.dark .prose table td, .dark .prose table th {
+  border: 1px solid #444; /* Dark mode border */
+}
+
+.dark .prose p {
+  color: #e0e0e0; /* Dark mode text color */
+}
+
+.dark .prose h1, .dark .prose h2, .dark .prose h3, .dark .prose h4 {
+  color: #e0e0e0; /* Dark mode header color */
+}
+
+.dark .prose a {
+  color: #66c0f4; /* Dark mode link color */
+}
+
+.dark .prose blockquote {
+  border-left: 4px solid #66c0f4; /* Dark mode blockquote border */
+  background-color: #333; /* Dark mode background */
+}
+
+.dark .prose code {
+  background-color: #333; /* Dark mode code background */
+}
+
+.dark .prose hr {
+  border-top: 1px solid #444; /* Dark mode border */
+}
