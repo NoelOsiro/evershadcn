@@ -8,23 +8,23 @@ import Link from 'next/link';
 import { useContributionsStore } from '@/store/contributionsStore';
 import { Contribution } from '@/types';
 
-const ListStart = [
-    { id: 1, title: "M-pesa" },
-    { id: 2, title: "M-changa" },
-    { id: 3, title: "Other" }
-];
+// const ListStart = [
+//     { id: 1, title: "M-pesa" },
+//     { id: 2, title: "M-changa" },
+//     { id: 3, title: "Other" }
+// ];
 
-const Listupdates = [
-  { id: 1, title: "Eulogy Update" },
-  { id: 2, title: "Funeral Arrangements" },
-  { id: 3, title: "Burial Details" }
-];
+// const Listupdates = [
+//   { id: 1, title: "Eulogy Update" },
+//   { id: 2, title: "Funeral Arrangements" },
+//   { id: 3, title: "Burial Details" }
+// ];
 
-const Listexplore = [
-  { id: 1, title: "Funeral Planning" },
-  { id: 2, title: "Grief Counseling" },
-  { id: 3, title: "Memorial Services" }
-];
+// const Listexplore = [
+//   { id: 1, title: "Funeral Planning" },
+//   { id: 2, title: "Grief Counseling" },
+//   { id: 3, title: "Memorial Services" }
+// ];
 
 interface SidebarProps {
   postId: string;
