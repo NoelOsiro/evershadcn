@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { SupabaseAdapter } from "@auth/supabase-adapter";
 
 import GoogleProvider from "next-auth/providers/google";
