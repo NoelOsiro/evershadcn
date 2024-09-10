@@ -1,4 +1,5 @@
 /* eslint-disable */
+// @ts-nocheck
 import { SupabaseAdapter } from "@auth/supabase-adapter";
 
 import GoogleProvider from "next-auth/providers/google";
