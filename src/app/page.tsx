@@ -1,17 +1,26 @@
+import AboutSectionOne from '@/components/About/AboutSectionOne'
+import AboutSectionTwo from '@/components/About/AboutSectionTwo'
+import Blog from '@/components/Blog'
+import BackgroundSVG from '@/components/BlogPost/BackgroundSVG'
+import BottomSVG from '@/components/BlogPost/BottomSVG'
+import Features from '@/components/Features'
+import Pricing from '@/components/Pricing'
+import Testimonials from '@/components/Testimonials'
 import { Button } from '@/components/ui/button'
+import Video from '@/components/Video'
 import Link from 'next/link'
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen flex flex-col mt-20">
-      <main className="flex-grow">
-        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white sm:text-5xl md:text-6xl">
-              Welcome to Evercherished
+    <div className="min-h-screen flex flex-col mt-20 ">
+      <main className="flex-grow mx-auto px-4">
+        <div className="max-w-7xl  py-12 px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-[800px] text-center">
+            <h1 className="mb-5 text-3xl font-bold leading-tight text-black dark:text-white sm:text-4xl md:text-5xl">
+              CHERISH MEMORIES OF LOVED ONES
             </h1>
-            <p className="mt-3 max-w-md mx-auto text-base text-gray-500 dark:text-gray-300 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-              Honor and remember your loved ones with heartfelt tributes and memorials.
+            <p className="mb-12 text-base leading-relaxed text-body-color dark:text-body-color-dark sm:text-lg md:text-xl">
+              Cherish and honour the memories of your loved ones and share with friends.
             </p>
             <div className="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
               <div className="rounded-md shadow">
@@ -26,7 +35,16 @@ export default function LandingPage() {
               </div>
             </div>
           </div>
+          <BackgroundSVG />
+          <BottomSVG />
         </div>
+        <Features />
+        <Video />
+        <AboutSectionOne />
+        <AboutSectionTwo />
+        <Testimonials />
+        <Pricing />
+        <Blog />
       </main>
     </div>
   )

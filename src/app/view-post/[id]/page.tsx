@@ -1,11 +1,11 @@
-import PostHeader from '@/components/Blog/PostHeader';
+import PostHeader from '@/components/BlogPost/PostHeader';
 import { Post } from '@/types';
 import './post.css';
-import ShareSection from '@/components/Blog/ShareSection';
-import CommentSection from '@/components/Blog/commentSection';
+import ShareSection from '@/components/BlogPost/ShareSection';
+import CommentSection from '@/components/BlogPost/commentSection';
 import { getCurrentUser } from '@/lib/auth';
 import { redirect } from 'next/navigation';
-import Sidebar from '@/components/Blog/Sidebar';
+import Sidebar from '@/components/BlogPost/Sidebar';
 
 
 

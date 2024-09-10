@@ -2,13 +2,13 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Modal } from './modal';
-// Ensure you have a modal component
 
 export default function CommentSection() {
   const [comments, setComments] = useState<{ name: string; comment: string }[]>([]);
-  const [newComment, setNewComment] = useState('');
-  const [commenterName, setCommenterName] = useState('');
+  const [newComment, setNewComment] = useState(''); // Moved to parent
+  const [commenterName, setCommenterName] = useState(''); // Moved to parent
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleAddComment = async () => {
@@ -37,20 +37,33 @@ export default function CommentSection() {
           placeholder="Write a comment..."
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
-          className="w-full"
+          className="w-full mb-4"
         />
-        <Button onClick={() => setIsModalOpen(true)} className="mt-2">Post Comment</Button>
+        <Button onClick={() => setIsModalOpen(true)} className="mt-2 hover:bg-blue-500">Post Comment</Button>
       </div>
       <ul className="mt-8 space-y-4">
         {comments.map((comment, index) => (
-          <li key={index} className="p-4 bg-secondary rounded-lg">
-            <strong>{comment.name}</strong>: {comment.comment}
-          </li>
+          <Card key={index} className="p-4 bg-secondary">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-semibold">{comment.name}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground">{comment.comment}</p>
+            </CardContent>
+          </Card>
         ))}
       </ul>
 
-      {/* Modal for adding comments */}
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} commenterName={commenterName} setCommenterName={setCommenterName} />
+      {/* Modal for adding name */}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        commenterName={commenterName}
+        setCommenterName={setCommenterName}
+        newComment={newComment}
+        setNewComment={setNewComment}
+        handleAddComment={handleAddComment}
+      />
     </div>
   );
 }

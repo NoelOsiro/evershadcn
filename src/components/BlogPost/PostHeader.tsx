@@ -1,6 +1,9 @@
 
 import { Badge } from "@/components/ui/badge"
 import Image from 'next/image'
+import BackgroundSVG from "./BackgroundSVG";
+import BottomSVG from "./BottomSVG";
+import './Hero.css'; // Import the CSS file
 
 interface PostHeaderProps {
       imageUrl: string,
@@ -15,7 +18,7 @@ export default function PostHeader(props:PostHeaderProps) {
     const { imageUrl, title, description, status, createdAt,type } = props;
     return (
     <header className=" p-4">
-      <div className="container py-12 md:py-16 lg:py-24">
+      <div className="container mx-auto py-12 md:py-16 lg:py-24">
         <div className="flex flex-col-reverse gap-6 md:grid md:grid-cols-[1fr_400px] md:gap-12 lg:grid-cols-[1fr_600px]">
           {
             /* Image first on mobile */
@@ -62,5 +65,7 @@ export default function PostHeader(props:PostHeaderProps) {
           </div>
         </div>
       </div>
+      <BackgroundSVG />
+        <BottomSVG />
     </header>);
   }

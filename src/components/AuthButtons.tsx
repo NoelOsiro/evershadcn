@@ -9,9 +9,9 @@ export function AuthButtons() {
   const { data: session } = useSession()
 
   return (
-    <div className="flex items-center space-x-2">
+    <div className="flex items-center space-x-8">
       {session ? (
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-4">
           {/* Profile Image */}
             <Image
               src={session.user?.image || '/default-profile.png'} // Fallback to default image if not available
@@ -21,7 +21,8 @@ export function AuthButtons() {
               height={32}
             />
             <span>{session.user?.name || 'Profile'}</span>
-          <Button onClick={() => signOut()} className="flex items-center space-x-1">
+          <Button variant={'outline'} onClick={() => signOut()} 
+          className="flex items-center space-x-1 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white hover:border-blue-600">
             <FaSignOutAlt className="text-sm" />
             <span>Sign out</span>
           </Button>

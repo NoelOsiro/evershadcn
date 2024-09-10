@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from "next/image";
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 import { AuthButtons } from '@/components/AuthButtons'
@@ -33,17 +34,30 @@ export function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20"> {/* Increased height */}
-          <div className="flex items-center">
-            <Link href="/" className="text-2xl font-bold"> {/* Increased font size */}
-              Evercherished
+        <div className="w-60 max-w-full px-4 xl:mr-12">
+            <Link href="/" className={`header-logo block w-full py-8"}`}>
+              <Image
+                src="/images/logo.png"
+                alt="logo"
+                width={128}
+                height={56}
+                className="w-32 h-14 dark:hidden"
+              />
+              <Image
+                src="/images/logo.png"
+                alt="logo"
+                width={128}
+                height={56}
+                className="hidden w-32 h-14 dark:block"
+              />
             </Link>
           </div>
-          <div className="flex items-center space-x-6"> {/* Increased spacing */}
-            <Link href="/" className="hover:underline">Home</Link>
-            <Link href="/about" className="hover:underline">About</Link>
-            <Link href="/support" className="hover:underline">Support</Link>
+          <div className="flex items-center space-x-16"> {/* Increased spacing */}
+            <Link href="/" className="hover:underline hover:text-blue-500">Home</Link>
+            <Link href="/about" className="hover:underline hover:text-blue-500">About</Link>
+            <Link href="/support" className="hover:underline hover:text-blue-500">Support</Link>
             {session && (
-              <Link href="/my-pages" className="hover:underline">My Pages</Link>
+              <Link href="/my-pages" className="hover:underline hover:text-blue-500">My Pages</Link>
             )}
             <AuthButtons />
             <ThemeToggle />
