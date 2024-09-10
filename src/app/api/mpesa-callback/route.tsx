@@ -10,6 +10,7 @@ export async function POST(req: Request) {
   // Verify the response and update the post status
   if (mpesaResponse.Body.stkCallback.ResultCode === 0) {
     const postId = mpesaResponse.Body.stkCallback.CallbackMetadata.Item.find(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (item: any) => item.Name === 'AccountReference'
     ).Value
 

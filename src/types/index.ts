@@ -1,13 +1,17 @@
 export type Post = {
-    id: string
-    title: string
-    description: string
-    status: 'draft' | 'published'
-    createdAt: string
-    content: string
-    updatedAt: string
-    type: 'tribute' | 'memorial' | 'obituary'
-    imageUrl: string
-    userId: string
-    
-  }
+  id: string
+  createdAt: string
+  title: string
+  description: string
+  status: 'draft' | 'published'
+  content: string
+  updatedAt: string | null
+  type: 'memorial' | 'tribute' | 'obituary'
+  imageUrl: string
+  userId: string
+  causeOfDeath: string
+  dateOfBirth: string
+  dateOfDeath: string
+  placeOfDeath: string
+  fullName: string
+}

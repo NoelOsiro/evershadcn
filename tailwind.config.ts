@@ -13,9 +13,9 @@ const config: Config = {
 			colors: {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
-				"bg-color-dark": "#171C28",
+				"bg-color-dark": "#3f3844;",
 				"body-color": {
-					DEFAULT: "#788293",
+					DEFAULT: "#2c2d31",
 					dark: "#959CB1",
 				},
 				gray: {

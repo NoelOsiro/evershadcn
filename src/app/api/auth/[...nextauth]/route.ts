@@ -1,5 +1,5 @@
 import { SupabaseAdapter } from "@auth/supabase-adapter";
-import type { NextAuthOptions } from "next-auth";
+
 import GoogleProvider from "next-auth/providers/google";
 import jwt from "jsonwebtoken";
 import NextAuth from "next-auth";

@@ -7,28 +7,38 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import dynamic from 'next/dynamic'
-
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 import 'react-quill/dist/quill.snow.css'
 import { Post } from '@/types'
+
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
+
+// Convert image to base64
+const convertImageToBase64 = (file: File): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onloadend = () => resolve(reader.result as string)
+    reader.onerror = (error) => reject(error)
+    reader.readAsDataURL(file)
+  })
+}
 
 export default function EditPostPage({ params }: { params: { id: string } }) {
   const router = useRouter()
   const [post, setPost] = useState<Post | null>(null)
+  const [content, setContent] = useState<string>("")
+  const [image, setImage] = useState<File | null>(null)
 
   useEffect(() => {
     // Fetch post data from API
     const fetchPost = async () => {
-      
       try {
-        const response = await fetch(`http://localhost:3000/api/getPosts?postId=${params.id}`)
+        const response = await fetch(`/api/getPosts?postId=${params.id}`)
         const data = await response.json()
 
-        // Check if data matches the expected format
         if (data && data.posts && data.posts.length > 0) {
-          setPost(data.posts[0])
-        } else {
-          console.error('Post data not found or invalid format')
+          const fetchedPost = data.posts[0]
+          setPost(fetchedPost)
+          setContent(fetchedPost.content) // Set content for editor
         }
       } catch (error) {
         console.error('Failed to fetch post data', error)
@@ -40,10 +50,50 @@ export default function EditPostPage({ params }: { params: { id: string } }) {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    // Handle form submission here
-    // Update post in the database
-    console.log('Form submitted', post)
-    router.push('/my-pages')
+
+    try {
+      let imageBase64 = ''
+      if (image) {
+        imageBase64 = await convertImageToBase64(image)
+      }
+
+      const updatedAt = new Date().toISOString()
+
+      const formData = new FormData()
+      if (!post) {
+        console.error('Post data is not available');
+        return;
+      }
+
+      formData.append('title', post.title)
+      formData.append('description', post.description)
+      formData.append('content', content)
+      formData.append('fullName', post.fullName)
+      formData.append('dateOfBirth', post.dateOfBirth)
+      formData.append('dateOfDeath', post.dateOfDeath)
+      formData.append('placeOfDeath', post.placeOfDeath)
+      formData.append('causeOfDeath', post.causeOfDeath || '')
+      formData.append('postType', post.type)
+      formData.append('updatedAt', updatedAt)
+
+      if (imageBase64) {
+        formData.append('image', imageBase64)
+      }
+
+      // Send update request to API
+      const response = await fetch(`/api/posts/${params.id}`, {
+        method: 'PUT',
+        body: formData,
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to update post')
+      }
+
+      router.push('/my-pages')
+    } catch (error) {
+      console.error('Error updating post:', error)
+    }
   }
 
   if (!post) {
@@ -59,12 +109,15 @@ export default function EditPostPage({ params }: { params: { id: string } }) {
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Post Type */}
               <div className="space-y-2">
                 <Label htmlFor="postType">Post Type</Label>
                 <RadioGroup
                   id="postType"
                   value={post.type}
-                  onValueChange={(value: 'tribute' | 'memorial' | 'obituary') => setPost({ ...post, type: value })}
+                  onValueChange={(value: 'tribute' | 'memorial' | 'obituary') =>
+                    setPost({ ...post, type: value })
+                  }
                 >
                   <div className="flex space-x-4">
                     <div className="flex items-center space-x-2">
@@ -83,6 +136,7 @@ export default function EditPostPage({ params }: { params: { id: string } }) {
                 </RadioGroup>
               </div>
 
+              {/* Title */}
               <div className="space-y-2">
                 <Label htmlFor="title">Title</Label>
                 <Input
@@ -93,30 +147,116 @@ export default function EditPostPage({ params }: { params: { id: string } }) {
                 />
               </div>
 
+              {/* Full Name */}
+              <div className="space-y-2">
+                <Label htmlFor="fullName">Full Name of Deceased</Label>
+                <Input
+                  id="fullName"
+                  value={post.fullName}
+                  onChange={(e) => setPost({ ...post, fullName: e.target.value })}
+                  required
+                />
+              </div>
+
+              {/* Description */}
+              <div className="space-y-2">
+                <Label htmlFor="description">Description</Label>
+                <Input
+                  id="description"
+                  value={post.description}
+                  onChange={(e) => setPost({ ...post, description: e.target.value })}
+                  required
+                />
+              </div>
+
+              {/* Date of Birth & Date of Death */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <Label htmlFor="dateOfBirth">Date of Birth</Label>
+                  <Input
+                    id="dateOfBirth"
+                    type="date"
+                    value={post.dateOfBirth}
+                    onChange={(e) => setPost({ ...post, dateOfBirth: e.target.value })}
+                    required
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="dateOfDeath">Date of Death</Label>
+                  <Input
+                    id="dateOfDeath"
+                    type="date"
+                    value={post.dateOfDeath}
+                    onChange={(e) => setPost({ ...post, dateOfDeath: e.target.value })}
+                    required
+                  />
+                </div>
+              </div>
+
+              {/* Place of Death & Cause of Death */}
+              <div className="space-y-2">
+                <Label htmlFor="placeOfDeath">Place of Death</Label>
+                <Input
+                  id="placeOfDeath"
+                  value={post.placeOfDeath}
+                  onChange={(e) => setPost({ ...post, placeOfDeath: e.target.value })}
+                  required
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="causeOfDeath">Cause of Death (optional)</Label>
+                <Input
+                  id="causeOfDeath"
+                  value={post.causeOfDeath}
+                  onChange={(e) => setPost({ ...post, causeOfDeath: e.target.value })}
+                />
+              </div>
+
+              {/* Content */}
               <div className="space-y-2">
                 <Label htmlFor="content">Content</Label>
                 <ReactQuill
                   theme="snow"
-                  value={post.content}
-                  onChange={(content) => setPost({ ...post, content })}
+                  value={content}
+                  onChange={setContent}
+                  className="h-80"
                   modules={{
                     toolbar: [
-                      [{ 'header': [1, 2, 3, false] }],
-                      ['bold', 'italic', 'underline', 'strike'],
-                      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                      ['link', 'image'],
-                      ['clean']
+                      [{ header: [1, 2, 3, false] }],
+                      ['bold', 'italic', 'underline'],
+                      ['link'],
+                      [{ list: 'ordered' }, { list: 'bullet' }],
+                      ['clean'],
                     ],
                   }}
                 />
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="image">Image</Label>
-                <Input id="image" type="file" accept="image/*" />
+              {/* Image */}
+              <div className="space-y-4">
+                <Label htmlFor="image" className="text-lg font-semibold">
+                  Image
+                </Label>
+                <input
+                  id="image"
+                  name="image"
+                  type="file"
+                  accept="image/*"
+                  onChange={(event) => {
+                    const file = event.currentTarget.files?.[0]
+                    if (file) {
+                      setImage(file)
+                    }
+                  }}
+                  className="text-lg p-3 w-full"
+                />
               </div>
 
-              <Button type="submit" className="w-full">Update Post</Button>
+              {/* Submit */}
+              <Button type="submit" className="w-full text-lg py-6 mt-6">
+                Update Post
+              </Button>
             </form>
           </CardContent>
         </Card>

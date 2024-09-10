@@ -1,15 +1,11 @@
 import PostHeader from '@/components/BlogPost/PostHeader';
-import { Post } from '@/types';
 import './post.css';
 import ShareSection from '@/components/BlogPost/ShareSection';
 import CommentSection from '@/components/BlogPost/commentSection';
 import { getCurrentUser } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 import Sidebar from '@/components/BlogPost/Sidebar';
-
-
-
-
+import { fetchPost } from '@/utils/fetchPost';
 
 
 export default async function ViewPostPage({ params }: { params: { id: string } }) {
@@ -52,11 +48,12 @@ export default async function ViewPostPage({ params }: { params: { id: string } 
                   className="prose dark:prose-invert mt-8"
                   dangerouslySetInnerHTML={{ __html: Post.content }}
                 />
+                
                 {/* Share Section */}
                 <ShareSection postUrl={postUrl} />
 
                 {/* Comments Section */}
-                <CommentSection />
+                <CommentSection postId={Post.id} />
               </div>
             </section>
           </article>
@@ -69,18 +66,4 @@ export default async function ViewPostPage({ params }: { params: { id: string } 
   );
 }
 
-export const fetchPost = async (postId: string): Promise<Post | null> => {
-  try {
-    const res = await fetch(`http://localhost:3000/api/getPosts?postId=${postId}`);
 
-    if (!res.ok) {
-      console.error('Failed to fetch posts');
-      return null;
-    }
-
-    const data = await res.json();
-    return data.posts[0];
-  } catch (error) {
-    return null;
-  }
-};

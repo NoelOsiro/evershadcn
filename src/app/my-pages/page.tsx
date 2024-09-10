@@ -31,7 +31,7 @@ export default async function MyPagesPage() {
                 <Image
                   src={post.imageUrl}
                   alt={post.title}
-                  layout="fill"
+                  fill
                   className="transition-transform duration-300 hover:scale-105 object-cover"
                 />
                 <Badge
@@ -44,10 +44,13 @@ export default async function MyPagesPage() {
               <CardHeader>
                 <CardTitle className="text-xl">{post.title}</CardTitle>
                 <CardDescription>
+                  <div>
                   Created on {new Date(post.createdAt).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })}
                   <Badge variant="outline" className="ml-2">
                     {post.type.charAt(0).toUpperCase() + post.type.slice(1)}
                   </Badge>
+                  </div>
+                  
                 </CardDescription>
 
               </CardHeader>

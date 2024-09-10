@@ -38,19 +38,19 @@ const TextSection = () => (
   <div className="w-full px-4 lg:w-1/2">
     <div className="max-w-[470px]">
       <div className="mb-9">
-        <h3 className="mb-4 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">
+        <h3 className="mb-4 text-xl font-bold text-blue-500 sm:text-2xl lg:text-xl xl:text-2xl">
           Community Involvement
         </h3>
-        <p className="text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed">
+        <p className="text-base font-medium leading-relaxed text-primary sm:text-lg sm:leading-relaxed">
           Share obituary/memorial/tribute in one click with the greater community as you
           collect service providers to assist you giving you and your family peace of mind.
         </p>
       </div>
       <div className="mb-9">
-        <h3 className="mb-4 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">
+        <h3 className="mb-4 text-xl font-bold text-blue-500 sm:text-2xl lg:text-xl xl:text-2xl">
           Funeral Products
         </h3>
-        <p className="text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed">
+        <p className="text-base font-medium leading-relaxed text-primary sm:text-lg sm:leading-relaxed">
           We provide a platform for you to showcase your services and products to the world. This includes
           hearse providers, lowering gear, decoration, caterers, tents and chairs, grief counsellors, probate lawyers, and program printers.
         </p>
