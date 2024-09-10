@@ -1,20 +1,17 @@
-/* eslint-disable */
-// @ts-nocheck
 import { SupabaseAdapter } from "@auth/supabase-adapter";
-
 import GoogleProvider from "next-auth/providers/google";
 import jwt from "jsonwebtoken";
 import NextAuth from "next-auth";
 
 export const authOptions = {
 	adapter: SupabaseAdapter({
-		url: process.env.NEXT_PUBLIC_SUPABASE_URL as string,
-		secret: process.env.SUPABASE_SERVICE_ROLE_KEY as string,
+		url: process.env.NEXT_PUBLIC_SUPABASE_URL,
+		secret: process.env.SUPABASE_SERVICE_ROLE_KEY,
 	}),
 	providers: [
         GoogleProvider({
-          clientId: process.env.GOOGLE_CLIENT_ID!,
-          clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+          clientId: process.env.GOOGLE_CLIENT_ID,
+          clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         }),
       ],
 
