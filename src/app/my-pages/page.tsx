@@ -13,8 +13,11 @@ export default async function MyPagesPage() {
   if (!user) {
     redirect('/signin')
   }
+  else {
+    
+  }
 
-  const dummyPosts = await fetchPosts(user.id)
+  const dummyPosts = user?.id ? await fetchPosts(user.id) : []
   return (
     <div className="min-h-screen flex flex-col mt-24">
       <main className="flex-grow container mx-auto px-4 py-8">

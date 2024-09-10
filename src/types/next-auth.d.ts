@@ -1,26 +1,14 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import NextAuth from "next-auth"
-import { Adapter, AdapterUser } from 'next-auth/adapters';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { SupabaseAdapter as SupabaseAdapterOriginal } from '@auth/supabase-adapter';
-
+import NextAuth, { type DefaultSession } from "next-auth"
+ 
 declare module "next-auth" {
+  // Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
   interface Session {
+    // A JWT which can be used as Authorization header with supabase-js for RLS.
+    supabaseAccessToken?: string
     user: {
-      id: string
-      name: string
-      email: string
-      image: string
-    }
-    
-  }
-}
-
-// types/next-auth.d.ts
-
-
-declare module '@auth/supabase-adapter' {
-  export interface SupabaseAdapter extends Adapter {
-    createUser(user: Omit<AdapterUser, 'id'>): Promise<AdapterUser>;
+      // The user's postal address
+      address: string
+    } & DefaultSession["user"]
   }
 }
