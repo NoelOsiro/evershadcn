@@ -6,8 +6,6 @@ export default function Checkout() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
       <div className="max-w-2xl mx-auto py-10 px-6">
-        {/* Theme Toggle */}
-
         {/* Checkout Form */}
         <h1 className="text-2xl font-semibold mb-8">Checkout</h1>
         <form className="space-y-6">
