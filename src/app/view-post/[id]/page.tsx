@@ -6,6 +6,7 @@ import { getCurrentUser } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 import Sidebar from '@/components/BlogPost/Sidebar';
 import { fetchPost } from '@/utils/fetchPost';
+import DescriptionComponent from '@/components/BlogPost/DescriptionComponent';
 
 
 export default async function ViewPostPage({ params }: { params: { id: string } }) {
@@ -22,13 +23,14 @@ export default async function ViewPostPage({ params }: { params: { id: string } 
     return <div>Loading...</div>;
   }
 
-  const postUrl = `http://localhost:3000/posts/${id}`; // Example post URL
+  const postUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/posts/${id}`; // Example post URL
 
   return (
     <div className="bg-background text-primary min-h-screen flex flex-col mt-24">
       
       <PostHeader
         imageUrl={Post.imageUrl}
+        authorImageUrl={user.image}
         title={Post.title}
         description={Post.description}
         status={Post.status}
@@ -42,7 +44,9 @@ export default async function ViewPostPage({ params }: { params: { id: string } 
           <article className="max-w-full">
             <section className="py-12 md:py-16 lg:py-24">
               <div>
-                <h1 className="text-3xl font-bold">{Post.title}</h1>
+                <h1 className="text-3xl font-bold mb-4">{Post.title}</h1>
+
+                <DescriptionComponent description={Post.description} />
                 {/* React Quill content */}
                 <div
                   className="prose dark:prose-invert mt-8"
@@ -59,7 +63,7 @@ export default async function ViewPostPage({ params }: { params: { id: string } 
           </article>
 
           {/* Sidebar column */}
-          <Sidebar/>
+          <Sidebar postId={Post.id}/>
         </div>
       </main>
     </div>

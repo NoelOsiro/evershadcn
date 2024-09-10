@@ -30,7 +30,7 @@ export default function LandingPage() {
               </div>
               <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
                 <Link href="/about" passHref>
-                  <Button variant="outline" className="w-full">Learn More</Button>
+                  <Button variant="outline" className="w-full text-primary bg-blue-400">Learn More</Button>
                 </Link>
               </div>
             </div>

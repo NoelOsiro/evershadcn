@@ -12,10 +12,11 @@ interface PostHeaderProps {
       status: string,
       createdAt: string
       type: string
+      authorImageUrl?: string | null
 
   }
 export default function PostHeader(props:PostHeaderProps) {
-    const { imageUrl, title, description, status, createdAt,type } = props;
+    const { imageUrl, title, description, status, createdAt,type,authorImageUrl } = props;
     return (
     <header className=" p-4">
       <div className="container mx-auto py-12 md:py-16 lg:py-24">
@@ -49,7 +50,7 @@ export default function PostHeader(props:PostHeaderProps) {
             <div>
               <div className="mt-4 flex items-center space-x-4 text-muted-foreground">
                 <div>
-                  <Image src="/images/R.jpeg" alt="Author Avatar" className="h-8 w-8 rounded-full" width={32} height={32} />
+                  <Image src={authorImageUrl? authorImageUrl:'/images/R.jpeg'} alt="Author Avatar" className="h-8 w-8 rounded-full" width={32} height={32} />
                 </div>
                 <div>
                   <span className="font-medium">John Doe</span>

@@ -1,4 +1,4 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { getCurrentUser } from '@/lib/auth'
@@ -14,7 +14,7 @@ export default async function MyPagesPage() {
     redirect('/signin')
   }
   else {
-    
+
   }
 
   const dummyPosts = user?.id ? await fetchPosts(user.id) : []
@@ -46,34 +46,40 @@ export default async function MyPagesPage() {
               </div>
               <CardHeader>
                 <CardTitle className="text-xl">{post.title}</CardTitle>
-                <CardDescription>
+
                   <div>
-                  Created on {new Date(post.createdAt).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })}
-                  <Badge variant="outline" className="ml-2">
-                    {post.type.charAt(0).toUpperCase() + post.type.slice(1)}
-                  </Badge>
+                    Created on {new Date(post.createdAt).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })}
+                    <Badge variant="outline" className="ml-2">
+                      {post.type.charAt(0).toUpperCase() + post.type.slice(1)}
+                    </Badge>
                   </div>
-                  
-                </CardDescription>
+
 
               </CardHeader>
               <CardContent className="flex-grow">
                 <p className="text-gray-600 dark:text-gray-300">{post.description}</p>
               </CardContent>
               <CardFooter className="flex justify-between">
-                <Link href={`/edit-post/${post.id}`}>
-                <Button variant="outline" size="sm">Edit</Button>
+                <Link href={`/edit-post/${post.id}`} passHref>
+                  <Button variant="outline" size="sm">Edit</Button>
                 </Link>
+
                 {post.status === 'published' ? (
-                  <Link href={`/view-post/${post.id}`} passHref>
-                  <Button variant="secondary" size="sm">View</Button>
-                  </Link>
+                  <>
+                    <Link href={`/view-post/${post.id}`} passHref>
+                      <Button variant="secondary" size="sm">View</Button>
+                    </Link>
+                    <Link href={`/add-services/${post.id}`} passHref>
+                      <Button size="sm">Add Services</Button>
+                    </Link>
+                  </>
                 ) : (
                   <Link href={`/checkout/${post.id}`} passHref>
-                  <Button size="sm">Publish</Button>
+                    <Button size="sm">Publish</Button>
                   </Link>
                 )}
               </CardFooter>
+
             </Card>
           ))}
         </div>

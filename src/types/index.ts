@@ -15,3 +15,9 @@ export type Post = {
   placeOfDeath: string
   fullName: string
 }
+export type  Contribution = {
+  id:number;
+  postId: string;
+  channel: string;
+  account_no: string;
+}
