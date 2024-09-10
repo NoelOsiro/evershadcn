@@ -1,119 +1,43 @@
-'use client'
-import { useFormik } from 'formik'
-import * as Yup from 'yup'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { useToast } from '@/hooks/use-toast'
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
 
-export function Checkout({ postId, amount }: { postId: string, amount: number }) {
-  const { toast } = useToast()
 
-  // Define validation schema using Yup
-  const validationSchema = Yup.object({
-    phoneNumber: Yup.string()
-      .required('Phone number is required')
-      .matches(/^\d{9,12}$/, 'Phone number must be between 9 and 12 digits'),
-    paymentMethod: Yup.string().required('Payment method is required'),
-  })
-
-  // Initialize Formik
-  const formik = useFormik({
-    initialValues: {
-      phoneNumber: '',
-      paymentMethod: 'mpesa', // Default payment method
-    },
-    validationSchema,
-    onSubmit: async (values) => {
-      try {
-        const response = await fetch('/api/initiate-payment', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ amount, phoneNumber: values.phoneNumber, postId, paymentMethod: values.paymentMethod }),
-        })
-
-        const data = await response.json()
-
-        if (data.success) {
-          toast({
-            title: 'Payment Initiated',
-            description: 'Please check your phone for the payment prompt.',
-          })
-        } else {
-          throw new Error(data.error)
-        }
-      } catch (error) {
-        toast({
-          title: 'Payment Failed',
-          description: 'There was an error initiating the payment. Please try again.',
-          variant: 'destructive',
-        })
-      }
-    },
-  })
-
+export default function Checkout() {
   return (
-    <form onSubmit={formik.handleSubmit} className="space-y-4">
-      <div>
-        <Label htmlFor="paymentMethod">Payment Method</Label>
-        <RadioGroup
-          id="paymentMethod"
-          value={formik.values.paymentMethod}
-          onChange={(value) => formik.setFieldValue('paymentMethod', value)}
-          className='flex space-x-4'
-        >
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="comfortable" id="r2" />
-            <Label htmlFor="r2">Comfortable</Label>
+    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+      <div className="max-w-2xl mx-auto py-10 px-6">
+        {/* Theme Toggle */}
+
+        {/* Checkout Form */}
+        <h1 className="text-2xl font-semibold mb-8">Checkout</h1>
+        <form className="space-y-6">
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium">
+              Name
+            </label>
+            <Input id="name" placeholder="John Doe" className="mt-1 w-full" />
           </div>
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="mpesa" id="r3" />
-            <Label htmlFor="r3">M-pesa</Label>
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium">
+              Email
+            </label>
+            <Input id="email" placeholder="johndoe@example.com" type="email" className="mt-1 w-full" />
           </div>
-
-          <RadioGroupItem value="M-pesa" id="M-pesa" />
-          <RadioGroupItem value="Credit_card" id="Credit Card" />
-        </RadioGroup>
-        {formik.errors.paymentMethod && formik.touched.paymentMethod && (
-          <div className="text-red-500 text-sm">{formik.errors.paymentMethod}</div>
-        )}
+          <div>
+            <label htmlFor="address" className="block text-sm font-medium">
+              Address
+            </label>
+            <Input id="address" placeholder="123 Street Name" className="mt-1 w-full" />
+          </div>
+          <div>
+            <label htmlFor="card" className="block text-sm font-medium">
+              Card Details
+            </label>
+            <Input id="card" placeholder="1234 5678 9012 3456" className="mt-1 w-full" />
+          </div>
+          <Button className="w-full mt-4">Pay Now</Button>
+        </form>
       </div>
-
-      <div>
-        <Label htmlFor="phoneNumber">Phone Number</Label>
-        <Input
-          id="phoneNumber"
-          type="tel"
-          {...formik.getFieldProps('phoneNumber')}
-          placeholder="254XXXXXXXXX"
-          className={formik.errors.phoneNumber && formik.touched.phoneNumber ? 'border-red-500' : ''}
-        />
-        {formik.errors.phoneNumber && formik.touched.phoneNumber && (
-          <div className="text-red-500 text-sm">{formik.errors.phoneNumber}</div>
-        )}
-      </div>
-
-      <Button type="submit">Pay {amount} KES</Button>
-    </form>
-  )
-}
-
-export function RadioGroupDemo() {
-  return (
-    <RadioGroup defaultValue="comfortable">
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="default" id="r1" />
-        <Label htmlFor="r1">Default</Label>
-      </div>
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="comfortable" id="r2" />
-        <Label htmlFor="r2">Comfortable</Label>
-      </div>
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="compact" id="r3" />
-        <Label htmlFor="r3">Compact</Label>
-      </div>
-    </RadioGroup>
+    </div>
   )
 }
