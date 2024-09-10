@@ -1,4 +1,5 @@
-import { useRouter } from 'next/router';
+'use client'
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 // Adjust the path if needed
 import React from 'react';
@@ -6,7 +7,7 @@ import {Checkout} from '@/components/Checkout';// Replace './path/to/Checkout' w
 
 const CheckoutPage = () => {
   const router = useRouter();
-  const { postId } = router.query;
+  const postId = '2'
   const [amount, setAmount] = useState<number>(0); // Initialize with a default value or fetch dynamically
 
   useEffect(() => {
@@ -27,7 +28,7 @@ const CheckoutPage = () => {
   }
 
   return (
-    <div className="p-4">
+    <div className="px-12 py-4 mt-24 mx-auto">
       <h1 className="text-2xl font-bold mb-4">Checkout</h1>
       <Checkout postId={postId} amount={amount} />
     </div>

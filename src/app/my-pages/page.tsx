@@ -63,7 +63,9 @@ export default async function MyPagesPage() {
                   <Button variant="secondary" size="sm">View</Button>
                   </Link>
                 ) : (
+                  <Link href={`/checkout/${post.id}`} passHref>
                   <Button size="sm">Publish</Button>
+                  </Link>
                 )}
               </CardFooter>
             </Card>

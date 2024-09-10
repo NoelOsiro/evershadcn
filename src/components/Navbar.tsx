@@ -37,14 +37,14 @@ export function Navbar() {
         <div className="w-60 max-w-full px-4 xl:mr-12">
             <Link href="/" className={`header-logo block w-full py-8"}`}>
               <Image
-                src="/images/logo.png"
+                src="/images/logo/logo.png"
                 alt="logo"
                 width={128}
                 height={56}
                 className="w-32 h-14 dark:hidden"
               />
               <Image
-                src="/images/logo.png"
+                src="/images/logo/logo.png"
                 alt="logo"
                 width={128}
                 height={56}

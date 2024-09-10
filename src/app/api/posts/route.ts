@@ -12,7 +12,7 @@ const dummyPosts: Post[] = [
     updatedAt: '2023-05-15',
     content: 'John Doe was a kind and generous person',
     type: 'memorial',
-    imageUrl: '/images/R.jpeg',
+    imageUrl: '/images/blog/blog-01.jpg',
     userId: '2d0b51cb-2fa6-41fd-bb35-cd1f81d722f6',
   },
   {
@@ -24,7 +24,7 @@ const dummyPosts: Post[] = [
     content: 'Jane Smith was a brilliant scientist who made many contributions to the field of physics.',
     updatedAt: '2023-06-10',
     type: 'tribute',
-    imageUrl: '/images/R.jpeg',
+    imageUrl: '/images/blog/blog-02.jpg',
     userId: '2d0b51cb-2fa6-41fd-bb35-cd1f81d722f6',
   },
   {
@@ -36,7 +36,7 @@ const dummyPosts: Post[] = [
     content: 'Dr. Emily Brown was a dedicated physician who saved countless lives during her career.',
     updatedAt: '2023-05-05',
     type: 'obituary',
-    imageUrl: '/images/R.jpeg',
+    imageUrl: '/images/blog/blog-03.jpg',
     userId: '2d0b51cb-2fa6-41fd-bb35-cd1f81d722f6',
   },
   {
@@ -48,7 +48,7 @@ const dummyPosts: Post[] = [
     content: 'Captain Michael Johnson was a brave firefighter who put others before himself.',
     updatedAt: '2023-06-15',
     type: 'memorial',
-    imageUrl: '/images/R.jpeg',
+    imageUrl: '/images/blog/blog-03.jpg',
     userId: '2d0b51cb-2fa6-41fd-bb35-cd1f81d722f6',
   },
 ]
