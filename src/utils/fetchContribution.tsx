@@ -1,4 +1,4 @@
-import { Contribution, Post } from "@/types";
+import { Contribution} from "@/types";
 
 export const fetchContribution = async (postId: string): Promise<Contribution[] | null> => {
     try {
