@@ -9,6 +9,9 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import dynamic from 'next/dynamic'
 import 'react-quill/dist/quill.snow.css'
 import { Post } from '@/types'
+import { useSession } from 'next-auth/react'
+import { useToast } from "@/hooks/use-toast";
+import { ToastAction } from "@/components/ui/toast";
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 
@@ -23,6 +26,8 @@ const convertImageToBase64 = (file: File): Promise<string> => {
 }
 
 export default function EditPostPage({ params }: { params: { id: string } }) {
+  const { data: session } = useSession()
+  const { toast } = useToast()
   const router = useRouter()
   const [post, setPost] = useState<Post | null>(null)
   const [content, setContent] = useState<string>("")
@@ -75,14 +80,18 @@ export default function EditPostPage({ params }: { params: { id: string } }) {
       formData.append('causeOfDeath', post.causeOfDeath || '')
       formData.append('postType', post.type)
       formData.append('updatedAt', updatedAt)
+      formData.append('userId', session?.user?.id || '');
+      formData.append('imageUrl', post.imageUrl || '');
+      formData.append('postId', params.id)
+
 
       if (imageBase64) {
         formData.append('image', imageBase64)
       }
 
       // Send update request to API
-      const response = await fetch(`/api/posts/${params.id}`, {
-        method: 'PUT',
+      const response = await fetch(`/api/posts`, {
+        method: 'POST',
         body: formData,
       })
 
@@ -92,7 +101,12 @@ export default function EditPostPage({ params }: { params: { id: string } }) {
 
       router.push('/my-pages')
     } catch (error) {
-      console.error('Error updating post:', error)
+      toast({
+        title: 'Failed to update post',
+        description: 'Please try again later',
+        variant: 'destructive',
+        action: <ToastAction altText="Try again">Retry</ToastAction>,
+    })
     }
   }
 

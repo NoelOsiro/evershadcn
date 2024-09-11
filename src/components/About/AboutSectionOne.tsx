@@ -35,7 +35,7 @@ const AboutSectionOne = () => {
             <div className="flex flex-col items-center justify-center m-[auto] space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
               <Link
                 href="/services"
-                className="rounded-sm bg-primary lg:px-8 lg:py-4 px-4 py-2 text-base font-semibold text-primary-foreground duration-300 ease-in-out hover:bg-primary/80"
+                className="rounded-sm bg-primary lg:px-8 lg:py-4 px-4 py-2 text-base font-semibold text-primary-foreground duration-300 ease-in-out hover:bg-blue-500/80"
               >
                 Other Services
               </Link>
@@ -67,7 +67,7 @@ interface ListProps {
 
 const List = ({ text }: ListProps) => (
   <p className="mb-5 flex items-center md:text-lg font-medium text-primary text-sm">
-    <span className="mr-4 flex h-[30px] w-[30px] items-center justify-center rounded-md bg-primary-foreground bg-opacity-10 text-primary">
+    <span className="mr-4 flex h-[30px] w-[30px] items-center justify-center rounded-md bg-blue-500/70 bg-opacity-10 text-primary-foreground">
       {checkIcon}
     </span>
     {text}

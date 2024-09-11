@@ -21,7 +21,7 @@ const Pricing = () => {
           center
           width="665px"
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="flex justify-center">
           <PricingBox
             packageName="Basic"
             price={"5,500"}

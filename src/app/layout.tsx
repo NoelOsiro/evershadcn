@@ -6,7 +6,9 @@ import { ThemeProvider } from "@/components/Providers/ThemeProvider";
 import { Navbar } from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import BackgroundSVG from "@/components/BlogPost/BackgroundSVG";
+import BottomSVG from "@/components/BlogPost/BottomSVG";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,13 +33,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider>
-        <SessionProvider>
-        <Navbar />{children}
-        <Footer/></SessionProvider>
+          <SessionProvider>
+            <Navbar />
+            <main className="min-h-screen flex flex-col">
+              <div className="relative flex-grow mx-auto w-full px-4 sm:px-6 lg:px-8">
+                <BackgroundSVG />
+                {children}
+                <BottomSVG />
+              </div>
+            </main>
+            <Footer />
+          </SessionProvider>
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />

@@ -26,12 +26,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (theme === 'dark') {
       document.documentElement.classList.add('dark')
-      document.body.classList.add('bg-gray-900')
-      document.body.classList.remove('bg-white')
+      document.body.classList.add('bg-gray-dark')
+      document.body.classList.remove('bg-gray-100')
     } else {
       document.documentElement.classList.remove('dark')
-      document.body.classList.remove('bg-gray-900')
-      document.body.classList.add('bg-white')
+      document.body.classList.remove('bg-gray-dark')
+      document.body.classList.add('bg-gray-100')
     }
     localStorage.setItem('theme', theme)
   }, [theme])

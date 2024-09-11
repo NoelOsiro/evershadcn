@@ -13,6 +13,8 @@ import TextInputField from "../Text/TextInputFieldProps";
 import RadioGroupField from "../Text/RadioGroupField";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
+import { ToastAction } from "@/components/ui/toast";
 
 
 interface AddPostFormValues {
@@ -43,6 +45,7 @@ const validationSchema = Yup.object({
 
 export function AddPostForm() {
     const { data: session } = useSession()
+    const { toast } = useToast()
     const router = useRouter();
     const [content, setContent] = useState<string>("");
     const radioOptions = [
@@ -50,6 +53,7 @@ export function AddPostForm() {
         { value: 'memorial', label: 'Memorial' },
         { value: 'obituary', label: 'Obituary' }
     ];
+
 
     const handleSubmit = async (values: AddPostFormValues, setSubmitting: (isSubmitting: boolean) => void) => {
         try {
@@ -89,6 +93,14 @@ export function AddPostForm() {
     
             router.push('/my-pages');
         } catch (error) {
+            // use toast
+            toast({
+                variant: "destructive",
+                title: "Uh oh! Something went wrong.",
+                description: "There was a problem with your request.",
+                action: <ToastAction altText="Try again">Try again</ToastAction>,
+              })
+            
             console.error('Error creating post:', error);
         } finally {
             setSubmitting(false);

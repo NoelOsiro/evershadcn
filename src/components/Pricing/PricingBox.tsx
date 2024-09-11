@@ -7,19 +7,19 @@ const PricingBox = (props: {
   const { price, packageName, subtitle, children } = props;
 
   return (
-    <div className="w-full">
-      <div className="relative z-10 rounded-sm bg-white px-8 py-10 shadow-three hover:shadow-one dark:bg-gray-dark dark:shadow-two dark:hover:shadow-gray-dark">
+    <div className="w-1/3">
+      <div className="relative z-10 rounded-sm px-8 py-10 shadow-md border-blue-300 hover:shadow-one dark:shadow-two dark:hover:shadow-md">
         <div className="flex items-center justify-between">
-          <h3 className="price mb-2 text-[32px] font-bold text-black dark:text-white">
+          <h3 className="price mb-2 text-[32px] font-bold text-blue-500">
             Kes <span className="amount">{price}</span>
           </h3>
-          <h4 className="mb-2 text-xl font-bold text-dark dark:text-white">
+          <h4 className="mb-2 text-xl font-bold text-blue-300">
             {packageName}
           </h4>
         </div>
-        <p className="mb-7 text-base text-body-color">{subtitle}</p>
-        <div className="mb-8 border-b border-body-color border-opacity-10 pb-8 dark:border-white dark:border-opacity-10">
-          <a href="/my-pages/create" className="flex w-full items-center justify-center rounded-sm bg-primary p-3 text-base font-semibold text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
+        <p className="mb-7 text-primary">{subtitle}</p>
+        <div className="mb-8 border-b border-blue-200 border-opacity-10 pb-8 dark:border-white dark:border-opacity-10">
+          <a href="/signin" className="flex w-full items-center justify-center rounded-sm bg-blue-500 hover:text-dark p-3 text-base font-semibold transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-md">
             Choose
           </a>
         </div>
