@@ -13,8 +13,8 @@ import Link from 'next/link'
 export default function LandingPage() {
   return (
     <div className="min-h-screen flex flex-col mt-20 ">
-      <main className="flex-grow mx-auto px-4">
-        <div className="max-w-7xl  py-12 px-4 sm:px-6 lg:px-8">
+      <main className="flex-grow mx-auto px-4 justify-center">
+        <div className="py-12 px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-[800px] text-center">
             <h1 className="mb-5 text-3xl font-bold leading-tight text-black dark:text-white sm:text-4xl md:text-5xl">
               CHERISH MEMORIES OF LOVED ONES
