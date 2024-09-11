@@ -15,7 +15,7 @@ export async function POST(req: Request) {
 
     const { data, error } = await supabase
       .from('eulogies')
-      .insert({ post_id: postId, content: eulogy })
+      .insert({ postId: postId, content: eulogy })
       .select();
 
     if (error) {

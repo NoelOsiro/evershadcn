@@ -14,7 +14,7 @@ import { toast } from '@/hooks/use-toast';
 import { Contribution, Post } from '@/types';
 import { useSession } from 'next-auth/react';
 import { User } from 'next-auth';
- // Adjust import paths as necessary
+// Adjust import paths as necessary
 
 export default function AddServicesPage({ params }: { params: { id: string } }) {
   const router = useRouter();
@@ -50,7 +50,7 @@ export default function AddServicesPage({ params }: { params: { id: string } }) 
     };
 
     fetchData();
-  }, [params.id, router,session]);
+  }, [params.id, router, session]);
 
   const handleGenerateEulogy = async () => {
     setIsGeneratingEulogy(true);
@@ -103,7 +103,7 @@ export default function AddServicesPage({ params }: { params: { id: string } }) 
     <div className="bg-background text-primary min-h-screen flex flex-col mt-24">
       <main className="flex-grow container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-8">Add Services for {post.title}</h1>
-        
+
         <section className="mb-12">
           <h2 className="text-2xl font-semibold mb-4">Contributions</h2>
           {contributions && contributions.length > 0 ? (
@@ -140,16 +140,16 @@ export default function AddServicesPage({ params }: { params: { id: string } }) 
           <h2 className="text-2xl font-semibold mb-4">Generate Eulogy</h2>
           <Dialog>
             <DialogTrigger asChild>
-              <Button>Generate Eulogy</Button>
+              <Button variant="outline">Generate Eulogy</Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="sm:max-w-[425px] bg-primary-foreground text-blue-500">
               <DialogHeader>
-                <DialogTitle>Generate Eulogy</DialogTitle>
+                <DialogTitle className=''>Generate Eulogy</DialogTitle>
               </DialogHeader>
               <div className="grid gap-4 py-4">
                 <div className="grid grid-cols-4 items-center gap-4">
                   <Label htmlFor="eulogyPrompt" className="col-span-4">
-                    Describe the person and their life
+                    Describe the person and their life, be as descriptive as possible
                   </Label>
                   <Textarea
                     id="eulogyPrompt"
