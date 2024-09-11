@@ -20,14 +20,14 @@ export default async function MyPagesPage() {
     return <div>Error: Unable to fetch user data. Please try logging in again.</div>
   }
 
-  console.log('Fetching posts for user:', user.id);
+
 
   let posts = null
   let error = null
 
   try {
     posts = await fetchPosts(user.id)
-    console.log('Fetched posts:', posts) // Debugging log
+
   } catch (err) {
     console.error('Error fetching posts:', err)
     error = 'Failed to fetch posts. Please try again later.'
