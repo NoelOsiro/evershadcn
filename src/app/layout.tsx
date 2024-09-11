@@ -5,7 +5,8 @@ import { SessionProvider } from "@/components/Providers/SessionProvider";
 import { ThemeProvider } from "@/components/Providers/ThemeProvider";
 import { Navbar } from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -39,7 +40,7 @@ export default function RootLayout({
         <Footer/></SessionProvider>
         </ThemeProvider>
         <Analytics />
-
+        <SpeedInsights />
       </body>
     </html>
   );

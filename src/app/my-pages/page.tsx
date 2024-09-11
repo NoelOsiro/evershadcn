@@ -11,14 +11,22 @@ export default async function MyPagesPage() {
   const user = await getCurrentUser()
 
   if (!user) {
+    console.log('No user found, redirecting to signin');
     redirect('/signin')
   }
+
+  if (!user.id) {
+    console.error('User object does not contain an id');
+    return <div>Error: Unable to fetch user data. Please try logging in again.</div>
+  }
+
+  console.log('Fetching posts for user:', user.id);
 
   let posts = null
   let error = null
 
   try {
-    posts = await fetchPosts(user.id || '')
+    posts = await fetchPosts(user.id)
     console.log('Fetched posts:', posts) // Debugging log
   } catch (err) {
     console.error('Error fetching posts:', err)
@@ -52,53 +60,53 @@ export default async function MyPagesPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {posts.map((post) => (
                   <Card key={post.id} className="flex flex-col overflow-hidden transition-all duration-300 hover:shadow-lg">
-                    <div className="relative h-48">
-                      <Image
-                        src={post.imageUrl || '/placeholder.svg'}
-                        alt={post.title}
-                        fill
-                        className="transition-transform duration-300 hover:scale-105 object-cover"
-                      />
-                      <Badge
-                        variant={post.status === 'published' ? 'default' : 'secondary'}
-                        className="absolute top-2 right-2"
-                      >
-                        {post.status.charAt(0).toUpperCase() + post.status.slice(1)}
+                  <div className="relative h-48">
+                    <Image
+                      src={post.imageUrl || '/placeholder.svg'}
+                      alt={post.title}
+                      fill
+                      className="transition-transform duration-300 hover:scale-105 object-cover"
+                    />
+                    <Badge
+                      variant={post.status === 'published' ? 'default' : 'secondary'}
+                      className="absolute top-2 right-2"
+                    >
+                      {post.status.charAt(0).toUpperCase() + post.status.slice(1)}
+                    </Badge>
+                  </div>
+                  <CardHeader>
+                    <CardTitle className="text-xl">{post.title}</CardTitle>
+                    <div>
+                      Created on {new Date(post.createdAt).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })}
+                      <Badge variant="outline" className="ml-2">
+                        {post.type.charAt(0).toUpperCase() + post.type.slice(1)}
                       </Badge>
                     </div>
-                    <CardHeader>
-                      <CardTitle className="text-xl">{post.title}</CardTitle>
-                      <div>
-                        Created on {new Date(post.createdAt).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })}
-                        <Badge variant="outline" className="ml-2">
-                          {post.type.charAt(0).toUpperCase() + post.type.slice(1)}
-                        </Badge>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="flex-grow">
-                      <p className="text-gray-600 dark:text-gray-300">{post.description}</p>
-                    </CardContent>
-                    <CardFooter className="flex justify-between">
-                      <Link href={`/edit-post/${post.id}`} passHref>
-                        <Button variant="outline" size="sm">Edit</Button>
-                      </Link>
+                  </CardHeader>
+                  <CardContent className="flex-grow">
+                    <p className="text-gray-600 dark:text-gray-300">{post.description}</p>
+                  </CardContent>
+                  <CardFooter className="flex justify-between">
+                    <Link href={`/edit-post/${post.id}`} passHref>
+                      <Button variant="outline" size="sm">Edit</Button>
+                    </Link>
 
-                      {post.status === 'published' ? (
-                        <>
-                          <Link href={`/view-post/${post.id}`} passHref>
-                            <Button variant="secondary" size="sm">View</Button>
-                          </Link>
-                          <Link href={`/add-services/${post.id}`} passHref>
-                            <Button size="sm">Add Services</Button>
-                          </Link>
-                        </>
-                      ) : (
-                        <Link href={`/checkout/${post.id}`} passHref>
-                          <Button size="sm">Publish</Button>
+                    {post.status === 'published' ? (
+                      <>
+                        <Link href={`/view-post/${post.id}`} passHref>
+                          <Button variant="secondary" size="sm">View</Button>
                         </Link>
-                      )}
-                    </CardFooter>
-                  </Card>
+                        <Link href={`/add-services/${post.id}`} passHref>
+                          <Button size="sm">Add Services</Button>
+                        </Link>
+                      </>
+                    ) : (
+                      <Link href={`/checkout/${post.id}`} passHref>
+                        <Button size="sm">Publish</Button>
+                      </Link>
+                    )}
+                  </CardFooter>
+                </Card>
                 ))}
               </div>
             )}
@@ -108,3 +116,5 @@ export default async function MyPagesPage() {
     </div>
   )
 }
+
+
