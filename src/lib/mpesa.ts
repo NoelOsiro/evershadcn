@@ -84,7 +84,6 @@ class MpesaDaraja {
       AccountReference: accountReference,
       TransactionDesc: transactionDesc,
     };
-
     return this.makeRequest(endpoint, 'POST', data);
   }
 
